@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || 'Default Title' %></title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for handling the hamburger menu -->
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Welcome to The Feed</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/posts">Posts</a></li>
+                <li><a href="/form">Submit a Post</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Hamburger icon -->
+        </div>
+        <div class="profile-menu" id="profile-menu">
+            <img src="<%= (user && user.profilePic) ? user.profilePic : '/default-profile-pic.png' %>" alt="Profile Picture" class="profile-pic"> <!-- Default profile picture -->
+            <div class="profile-info">
+                <h3><%= (user && user.username) ? user.username : 'Guest' %></h3> <!-- Default username -->
+                <p><%= (user && user.realName) ? user.realName : '' %></p> <!-- Default real name -->
+                <a href="/profile/edit">Edit Profile</a>
+            </div>
+            <ul>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <%- body %> <!-- Render the content of the specific page here -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 The Feed. All rights reserved.</p>
+    </footer>
+
+    <script src="./public/js/layout.js"></script>
+</body>
+</html>

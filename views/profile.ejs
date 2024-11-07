@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1><%= user.username %>'s Profile</h1>
+    <h2>Your Posts:</h2>
+    <ul>
+        <% user.posts.forEach(post => { %>
+            <li>
+                <h3><%= post.title %></h3>
+                <p><%= post.content %></p>
+                <a href="/posts/<%= post._id %>">View Post</a>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
