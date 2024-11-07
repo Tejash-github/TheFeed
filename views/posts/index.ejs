@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Blog Posts</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+
+    <form action="/posts/search" method="GET">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <input type="text" name="query" placeholder="Search posts...">
+        <button type="submit">Search</button>
+    </form>
+    
+    <h2>Recent Posts</h2>
+    <% if (posts.length === 0) { %>
+        <p>No posts available.</p>
+    <% } else { %>
+        <ul>
+            <% posts.forEach(post => { %>
+                <li>
+                    <h3><a href="/posts/<%= post._id %>"><%= post.title %></a></h3>
+                    <p>By <%= post.author.username %> on <%= post.createdAt.toDateString() %></p>
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
+</body>
+</html>

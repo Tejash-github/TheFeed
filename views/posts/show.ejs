@@ -1,0 +1,39 @@
+<!-- views/posts/show.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title><%= post.title %></title>
+</head>
+<body>
+    <h1><%= post.title %></h1>
+    <p>By <%= post.author.username %></p>
+    <p><%= post.content %></p>
+    <a href="/posts/<%= post._id %>/edit">Edit</a>
+    <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <button type="submit">Delete</button>
+    </form>
+
+    <h2>Comments</h2>
+    <ul>
+        <% post.comments.forEach(comment => { %>
+            <li>
+                <p><%= comment.content %> - <%= comment.author.username % ></p>
+                <% if (req.user && req.user._id.equals(comment.author._id)) { %>
+                    <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                <% } %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <form action="/comments/<%= post._id %>" method="POST">
+        <input type="text" name="content" placeholder="Add a comment...">
+        <button type="submit">Add Comment</button>
+    </form>
+</body>
+</html>
