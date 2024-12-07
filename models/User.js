@@ -6,6 +6,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   profilePicture: { type: String, required: true },
+  tagInteractions: { type: Object, default: {} },
+  postInteractions: { type: Object, default: {} },
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

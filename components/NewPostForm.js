@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Button from './Button'; // Ensure you import your Button component
+import { userAgent } from 'next/server';
+import { table } from 'console';
 
 const NewPostForm = () => {
   const [title, setTitle] = useState('');
@@ -13,7 +15,12 @@ const NewPostForm = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, content, author }),
+      body: JSON.stringify({ 
+        title,
+        content, 
+        author: user.name,
+        tags: tags.split(',').map(tag => tag.trim())
+      }),
     });
     if (res.ok) {
       const newPost = await res.json();

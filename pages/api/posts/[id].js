@@ -1,6 +1,43 @@
 // pages/api/posts/[id].js
 import dbConnect from '../../../lib/db';
 import Post from '../../../models/Post';
+import PostComponent from '../../components/Post';
+import { useEffect } from 'react';
+
+const PostPage = ({ post }) => {
+  const userId = JSON.parse(localStorage.getItem('user'))._id; // Get user ID from local storage
+
+  useEffect(() => {
+    const logInteraction = async () => {
+      await fetch('/api/logPostInteraction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, postId: post._id }),
+      });
+    };
+
+    logInteraction();
+  }, [post._id, userId]);
+  return (
+    <div>
+      <PostComponent post={post} />
+    </div>
+  );
+};
+
+export async function getServerSideProps({ params }) {
+  await dbConnect();
+  const post = await Post.findById(params.id).lean();
+
+  return {
+    props: {
+      post: JSON.parse(JSON.stringify(post)),
+    },
+  };
+}
+
 
 export default async function handler(req, res) {
   const { id } = req.query;

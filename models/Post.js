@@ -6,6 +6,7 @@ const PostSchema = new mongoose.Schema({
   content: { type: String, required: true },
   author: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  tags: { type: [String], required: true, default: [] }, // Add this line
 });
 
 export default mongoose.models.Post || mongoose.model('Post', PostSchema);

@@ -9,6 +9,7 @@ const CreatePost = () => {
   const [user, setUser ] = useState(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [tags, setTags] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const CreatePost = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, content, author: user.name }), // Use user's name as author
+      body: JSON.stringify({ title, content, author: user.name, tags: tags.split(',').map(tag => tag.trim()) }), // Use user's name as author
     });
 
     if (res.ok) {
@@ -69,6 +70,15 @@ const CreatePost = () => {
               maxLength={2000}
             />
             <p>{content.length}/2000 characters</p>
+            <div>
+            <label className="form-label">Tags (comma separated)</label>
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              className="form-input"
+            />
+          </div>
           </div>
           <button type="submit" className="button">Create Post</button>
         </form>
