@@ -1,8 +1,10 @@
 // pages/create-post.js
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+
+
+const Tiptap = dynamic(() => import('../components/Tiptap'), { ssr: false });
 
 const CreatePost = () => {
   const [user, setUser ] = useState(null);
@@ -16,7 +18,7 @@ const CreatePost = () => {
     if (storedUser ) {
       setUser (JSON.parse(storedUser ));
     } else {
-      router.push('/login');
+      router.push('/login'); 
     }
   }, [router]);
 
@@ -30,7 +32,7 @@ const CreatePost = () => {
       },
       body: JSON.stringify({
         title,
-        content,
+        content, 
         author: user.name,
         tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
       }),
@@ -43,47 +45,36 @@ const CreatePost = () => {
     } else {
       const errorData = await res.json();
       console.error('Failed to create post:', errorData);
-      alert('Failed to create post: ' + errorData.message);
+      alert('Failed to create post: ' + errorData.message); 
     }
+  };
+
+  const handleContentChange = (newContent) => {
+    setContent(newContent);
   };
 
   return (
     <div>
-      <Header />
       <main className="main-content">
         <h2 className="welcome-title">Create a New Post</h2>
-        <form onSubmit={handleSubmit} className="post-form">
-          <label className='form-label'>Title</label>
+        <form onSubmit={handleSubmit} className ="post-form">
           <input
             type="text"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className='form-input'
           />
-
-          <label className='form-label'>Content</label>
-          <textarea
-            placeholder="Content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className='form-input'
-            required
-          />
-
-          <label className='form-label'>Tags</label>
           <input
             type="text"
             placeholder="Tags (comma separated)"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            className='form-input'
           />
+          <Tiptap onChange={handleContentChange} content={content} />
           <button type="submit">Submit</button>
         </form>
       </main>
-      <Footer />
     </div>
   );
 };

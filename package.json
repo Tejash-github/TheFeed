@@ -9,13 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hocuspocus/provider": "^2.14.0",
+    "@tiptap/extension-collaboration": "^2.10.3",
+    "@tiptap/extension-collaboration-cursor": "^2.10.3",
+    "@tiptap/extension-document": "^2.10.3",
+    "@tiptap/extension-paragraph": "^2.10.3",
+    "@tiptap/extension-text": "^2.10.3",
     "bcrypt": "^5.1.1",
+    "draft-js": "^0.11.7",
+    "express-rate-limit": "^7.4.1",
     "formidable": "^3.5.2",
     "mongoose": "^8.8.3",
     "next": "15.0.3",
     "next-auth": "^4.24.10",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "nodemailer": "^6.9.16",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-quill": "^2.0.0",
+    "tiptap": "^1.32.2",
+    "yjs": "^13.6.20"
   },
   "devDependencies": {
     "@types/node": "^20",

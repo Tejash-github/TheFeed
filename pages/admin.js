@@ -34,36 +34,31 @@ const AdminPanel = () => {
             throw new Error('Failed to fetch users');
           }
           const data = await response.json();
-          setUsers(data); // Set the users state
+          setUsers(data); 
         } catch (error) {
           console.error('Error fetching users:', error);
         } finally {
-          setLoading(false); // Set loading to false after fetching
+          setLoading(false); 
         }
       };
 
     fetchData(), fetchUsers();
   }, []);
 
-  // Check if users is defined and is an array
+
   if (!Array.isArray(users)) {
     console.error('Users is not an array:', users);
     return <p>Error: Users data is not available.</p>;
   }
 
-  const handleDeleteUser  = async (id) => {
+  const handleDeleteUser   = async (id) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this user?');
     if (confirmDelete) {
       try {
         const response = await fetch(`/api/user/${id}`, {
           method: 'DELETE',
         });
-        if (!response.ok) {
-          throw new Error('Failed to delete user');
-        }
-        // Remove the deleted user from the state
-        setUsers(users.filter(user => user._id !== id));
-        alert('User  deleted successfully');
+        
       } catch (error) {
         console.error('Error deleting user:', error);
       }

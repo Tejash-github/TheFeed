@@ -8,6 +8,8 @@ const UserSchema = new mongoose.Schema({
   profilePicture: { type: String, required: true },
   tagInteractions: { type: Object, default: {} },
   postInteractions: { type: Object, default: {} },
+  confirmationToken: { type: String },
+  isConfirmed: { type: Boolean, default: false },
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

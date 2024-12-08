@@ -1,13 +1,14 @@
 // pages/api/users.js
-import dbConnect from '../../lib/db'; // Ensure you have this import
-import User from '../../models/User'; // Import the User model
+import dbConnect from '../../lib/db'; 
+import User from '../../models/User'; 
+import limiter from '../../lib/rateLimiter';
 
 export default async function handler(req, res) {
-  await dbConnect(); // Connect to the database
+  await dbConnect(); 
 
   if (req.method === 'GET') {
     try {
-      const users = await User.find().select('-password'); // Fetch all users, excluding passwords
+      const users = await User.find().select('-password');
       res.status(200).json(users);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -17,4 +18,7 @@ export default async function handler(req, res) {
     res.setHeader('Allow', ['GET']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-}
+  };
+
+
+

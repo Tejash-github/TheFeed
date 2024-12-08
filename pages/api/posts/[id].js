@@ -1,11 +1,11 @@
 // pages/api/posts/[id].js
 import dbConnect from '../../../lib/db';
 import Post from '../../../models/Post';
-import PostComponent from '../../components/Post';
+import PostComponent from '../../../components/Post';
 import { useEffect } from 'react';
 
 const PostPage = ({ post }) => {
-  const userId = JSON.parse(localStorage.getItem('user'))._id; // Get user ID from local storage
+  const userId = JSON.parse(localStorage.getItem('user'))._id; 
 
   useEffect(() => {
     const logInteraction = async () => {
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
-    return res.status(204).end(); // No content
+    return res.status(204).end();
   }
 
   res.setHeader('Allow', ['DELETE']);

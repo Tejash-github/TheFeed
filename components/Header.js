@@ -34,11 +34,9 @@ const Header = () => {
 
   const handleProfileClick = () => {
     if (user) {
-      // Redirect to profile page if logged in
-      window.location.href = '/myprofile'; // Change this to your profile page path
-    } else {
-      // Redirect to login page if not logged in
-      window.location.href = '/login'; // Change this to your login page path
+      window.location.href = '/myprofile'; 
+    } else {    
+      window.location.href = '/login'; 
     }
   };
 
@@ -53,7 +51,7 @@ const Header = () => {
           <div className="divider"></div>
         </div>
         <div className="logo">
-          <img src="/logo.png" alt="Logo" /> {/* Adjust width and height as needed */}
+          <img src="/logo.png" alt="Logo" /> {}
         </div>
         <div className="nav-right">
           <Link href="/about">About</Link>
@@ -63,7 +61,7 @@ const Header = () => {
         </div>
         <div className="profile-pic" onClick={handleProfileClick}>
           <img
-            src={user ? user.profilePicture : './default-profile.png'} // Default image if not logged in
+            src={user ? user.profilePicture : './default-profile.png'} 
             alt="Profile"
             className="profile-image"
           />

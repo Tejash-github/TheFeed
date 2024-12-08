@@ -1,21 +1,20 @@
 // pages/api/login.js
-import { users } from '../../data'; // Assuming you have a mock database
-import User from '../../models/User'; // Import the User model
-import bcrypt from 'bcrypt'; // Import bcrypt for password comparison
+import { users } from '../../data'; 
+import User from '../../models/User'; 
+import bcrypt from 'bcrypt'; 
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { email, password } = req.body;
 
-    // Find the user by email
-    const user = await User.findOne({ email }); // Use the User model to find the user
 
-    // Check if user exists and password matches
+    const user = await User.findOne({ email });
+
     if (user) {
-      const isMatch = await bcrypt.compare(password, user.password); // Compare the hashed password
+      const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
-        // Return user data (omit password for security)
-        const { password, ...userData } = user.toObject(); // Convert Mongoose document to plain object
+       
+        const { password, ...userData } = user.toObject();
         return res.status(200).json(userData);
       }
     }

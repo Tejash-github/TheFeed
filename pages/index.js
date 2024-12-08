@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // Declare isPopupOpen state
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
 
   const truncateText = (text, maxLength) => {
